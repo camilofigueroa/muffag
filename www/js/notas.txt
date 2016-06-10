@@ -1,0 +1,2 @@
+
+Esta carpeta ha de contener todo lo referente a los archivos de javascript.
