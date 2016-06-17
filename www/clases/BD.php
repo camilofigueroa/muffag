@@ -38,7 +38,8 @@
         */
         private function conectar_a_bd()
         {
-            return mysqli_connect( $this->servidor, $this->usuario, $this->clave, $this->bd );
+            $respuesta=$this->conectar();
+            return  $respuesta;
         }
 
         /*
@@ -48,6 +49,7 @@
         */
         function conectar()
         {
+
                  Return mysqli_connect($this->servidor, $this->usuario, $this->clave, $this->bd);
                 
         }
