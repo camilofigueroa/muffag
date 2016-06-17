@@ -31,6 +31,7 @@
             //-------puede agregar más código si se requieren datos adicionales desde el config -----------------
         }
 
+
         /**
         * Realiza una conexión simple a la base de datos.
         * @return       conexion        
@@ -39,6 +40,18 @@
         {
             return mysqli_connect( $this->servidor, $this->usuario, $this->clave, $this->bd );
         }
+
+        /*
+        *en esta funcion se elaborar la conexion al servidor y ala base de datos 
+        *no resive ningun parametro no funcion
+        @return retorna la conexion ala base de datos y servidor 
+        */
+        function conectar()
+        {
+                 Return mysqli_connect($this->servidor, $this->usuario, $this->clave, $this->bd);
+                
+        }
+
 
         /**
         * Se encarga de retornar la fecha y hora desde el servidor de la base de datos.
@@ -61,10 +74,59 @@
             return $respuesta;
         }
 
-
-
-
         /***********aguegue sus métodos después de esta línea de código****************************************/
+
+        /*
+        
+        */
+
+        function validar_usuario($cons, $usu)
+        {
+            
+                $con = $this->conectar();
+                $resultado = $con->query($cons);
+                $a = mysqli_fetch_array($resultado);
+                Return $a;
+        }
+
+        function insertar($tabla, $campos)
+        {
+            
+            
+            $c=", ";
+            $value  =" VALUES (";
+            $insert ="INSERT INTO ".$tabla."(";
+            for ($i=0; $i <count($campos) ; $i++) 
+            { 
+                if($i>=count($campos)-1)$c=" ";
+                    
+                    $insert .= $campos[$i][1].$c;
+
+                    $value .= "'".$campos[$i][0]."'".$c;
+            }
+
+            $insert_into= $insert.") ".$value.")";
+            $con = $this->conectar();
+            $resultado = $con->query($insert_into);
+            Return $resultado;
+    
+        }
+
+        /*
+        *en esta funcion se encarga de recivir la consulta enviada desde el archivo graficos.php y hacer su consulta en la base de datos 
+        @param varchar recive la consulta de la base de datos 
+        @return retorna la consulta
+        */
+        function retornar_tabla($cons)
+        {
+            
+                $con = $this->conectar();
+                $resultado = $con->query($cons);
+                Return $resultado;
+        }
+
+
+
 
 
     }
