@@ -5,4 +5,4 @@
     $servidor = "localhost";
     $usuario = "root";
     $clave = "";
-    $bd = "bd_cabf_sena";
+    $bd = "bd_museo_guaviare";
