@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://getbootstrap.com/examples/navbar-static-top/ -->
+<html lang="en" ng-app="acumuladorApp">
+  
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>Static Top Navbar Example for Bootstrap</title>
+
+    <!-- Fuente de google -->
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar-static-top.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- se agrega el angular js -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-sanitize.js"></script>
+
+    <!-- Estilos propios de la creación mariposa alas 3D y el sitio -->
+    <link rel="stylesheet" href="css/estilo-mariposa.css">
+    <!-- Fin estilos propios de la creación mariposa alas 3D y el sitio -->
+
+    <!-- Este es el estilo general de todo el sitio -->
+    <link rel="stylesheet" href="css/estilo-general-sitio.css">
+
+    <!-- Los tweeners de Gsap --> 
+    <script src="js/minified/TweenMax.min.js"></script> 
+  </head>
+
+  <body onresize="obj_mecanismos.al_redimensionar_pantalla();" onscroll="obj_mecanismos.al_mover_barra_lateral();">
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <!-- <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://getbootstrap.com/examples/navbar-static-top/#">Muffag</a>
+        </div> -->
+        <!-- <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="http://getbootstrap.com/examples/navbar-static-top/#">Home</a></li>
+            <li><a href="http://getbootstrap.com/examples/navbar-static-top/#about">About</a></li>
+            <li><a href="http://getbootstrap.com/examples/navbar-static-top/#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="http://getbootstrap.com/examples/navbar-static-top/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://getbootstrap.com/examples/navbar-static-top/#">Action</a></li>
+                <li><a href="http://getbootstrap.com/examples/navbar-static-top/#">Another action</a></li>
+                <li><a href="http://getbootstrap.com/examples/navbar-static-top/#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="http://getbootstrap.com/examples/navbar-static-top/#">Separated link</a></li>
+                <li><a href="http://getbootstrap.com/examples/navbar-static-top/#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://getbootstrap.com/examples/navbar/">Default</a></li>
+            <li class="active"><a href="http://getbootstrap.com/examples/navbar-static-top/">Static top <span class="sr-only">(current)</span></a></li>
+            <li><a href="http://getbootstrap.com/examples/navbar-fixed-top/">Fixed top</a></li>
+          </ul>
+        </div> --><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- ************************* aquí empiezan las funcionalidades propias del sistema *************************** -->
+
+    <div class="container">
+
+      <p>
+        <h1>Museo Fotográfico de Flora y Fauna del Guaviare</h1>
+      </p>
+
+      <br><br>
+
+      <p>
+        <div id="contenedor-informacion-sistema">
+
+        </div>
+      </p>
+
+      <p>
+        <!-- --------------------------------------- M A R I P O S A ----------------------------------------------------------------------------- -->      
+        <div id="contenedor-mariposa"> 
+
+            <div id="contenedor-alas-sombras">
+                <div id="ala-izquierda-sombra" class="ala-i-3D">
+                    <img src="imagenes/ala-i-mariposa-sombra.png">
+                </div>
+
+                <div id="ala-derecha-sombra"  class="ala-d-3D">
+                    <img src="imagenes/ala-d-mariposa-sombra.png">
+                </div>
+            </div>
+
+            <div id="contenedor-alas">
+                <div id="ala-izquierda"  class="ala-i-3D" onmouseover="mover( 'ala-izquierda' );" onmousemove="obj_movimiento.mover_ala( 'izquierda', event );" onmouseout="obj_movimiento.retornar_alas_pos_origen();">
+                    <img src="imagenes/ala-i-mariposa.png">
+                </div>
+
+                <div id="ala-derecha"  class="ala-d-3D" onmouseover="mover( 'ala-derecha' );" onmousemove="obj_movimiento.mover_ala( 'derecha', event );"  onmouseout="obj_movimiento.retornar_alas_pos_origen();">
+                    <img src="imagenes/ala-d-mariposa.png">
+                </div>
+            </div>
+
+        </div>  <!-- Fin contenedor mariposa -->
+        <!-- -------------------------------- F I N  M A R I P O S A ------------------------------ -->
+      </p>
+
+    </div> <!-- /container -->
+
+    <div class="container"> <!-- aquí se hacen las búsquedas -->
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+
+        <h1>Buscador</h1>
+
+        <br>
+
+        <div class="jumbotron">
+          
+          <p>Por favor ingresa aquí tu búsqueda</p>
+
+          <p>
+
+            <div ng-controller="acumuladorAppCtrl"> <!-- angularjs -->
+
+              <!-- Aquí se renderiza el html del sanitize -->
+              <span ng-bind-html="Message"></span>
+
+              <div id="contenedor-texto-busquedas">
+
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">@</span>
+                  <input id="texto-busqueda" type="text" class="form-control" placeholder="Ingresa tu búsqueda" aria-describedby="basic-addon1" ng-model="datos.texto2" ng-change="cargar_datos()">
+                </div>
+
+                <!-- Esto es importante para que se escriban los resultados como un ciclo dependiendo de la info php MySQL -->
+                
+                Resultados de la búsqueda<br>
+                <div class="contenedor-negro-informacion" ng-repeat="datos in informacion">
+                    <button class="btn btn-success" ng-click="ajustar_comando_busqueda_completa( datos.Id )">Ver</button>
+                    {{ datos.Nombre_comun }} <strong>{{ datos.Nombre_cientifico }}</strong>
+                    {{ datos.Nom_familia }}
+                    {{ datos.Nom_clase }}
+                    {{ datos.Nom_especie }}
+                    {{ datos.Nom_genero }}
+                    {{ datos.Nom_orden }}
+                    {{ datos.Nom_localidad }}
+                    {{ datos.Nom_municipio }}
+                    
+                    <div ng-if="datos.Decision != -1">
+                      <!-- Renderizando html -->
+                      <span ng-bind-html="datos.Decision"></span>
+                      
+                      
+                      
+                    </div>
+                    
+                    <!-- <div ng-if="datos.Decision != -1">
+                      Se ha activado {{ datos.Decision }}
+                    </div> --> 
+                    
+                    <!-- Esta forma del if funciona -->
+                    <!-- <div ng-if="datos.Decision != 0">
+                      Se ha activado
+                    </div> -->
+                    
+                    <!-- Esta forma del if funciona -->
+                    <!-- <div>{{datos.Decision != 0 ? 'varIsTrue' : 'varIsFalse'}}</div> -->
+                    
+                </div>
+
+                <!-- <div>
+                   <ul>
+                      <li ng-repeat="n in range( 5, 15 )">Number {{n}}</li>
+                  </ul> 
+                </div> -->
+              
+              </div>
+
+            </div>
+
+          </p>
+
+        </div>
+
+      </div> <!-- contenedor-clarificador --> 
+
+    </div> <!-- /container -->
+
+    <!-- Este div es super importante ya que favorece el crecimiento de la p�gina verticalmente, sin comportamientos raros -->
+		<div class="div-limpiador"></div>
+
+    <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>¿Qué es el Museo Fotográfico de Flora y Fauna Silvestre?</h2>
+          <p>
+            Como bien es sabido, las características biogeográficas de Colombia hacen del país un territorio rico en diversidad, sin embargo, en algunas regiones el conocimiento de su flora y fauna es escaso. A pesar de estos vacíos de información, los impactos de la transformación de las áreas naturales avanzan a pasos agigantados, corriendo el riesgo de perder valiosos recursos biológicos incluso sin conocerlos. El museo Fotográfico es una herramienta de fácil acceso que permite conocer, estudiar, aportar información sobre las características taxonómicas, ecológicas, de distribución, uso y aprovechamiento de la flora y la fauna del departamento del Guaviare, que puede ser consultada y actualizada de manera permanente, desde las instituciones educativas, turistas y personal en general.
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div>
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+
+    <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>¿Cómo se crea el Museo Fotográfico de Flora y Fauna?</h2>
+          <p>
+            En concordancia con los objetivos del Plan estratégico de Ciencia, Tecnología e Innovación y los objetivos establecidos en el Plan de Desarrollo 2012-2015 a partir de las bases del Plan Nacional de Desarrollo 2010-2014 “Prosperidad para Todos” a través de la Ley 1450 de 2011, el SENA regional Guaviare CDATTG crea el Grupo de Investigación en Biodiversidad BIOGIGAS a partir del cual, nace el Semillero de investigación en Flora y Fauna Silvestre del Guaviare SIFFAS. De allí se gesta esta propuesta del Museo Fotográfico, a partir de la articulación con los proyectos formativos de la Red Ambiental de la CDATTG, con la participación de aprendices en el semillero, involucrándolos en procesos investigativos y promoviendo la apropiación y el arraigo del conocimiento sobre los recursos naturales propios de la región.
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div>
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+
+    <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>Misión</h2>
+          <p>
+            Ofrecer a nuestros visitantes virtuales y presenciales la mejor información científica y didáctica sobre la flora y la fauna del departamento del Guaviare. Asegurar siempre el fácil acceso a la información y promover la divulgación y apropiación del conocimiento de la naturaleza principalmente en la población local para la protección y conservación de los recursos a través de la participación de jóvenes guaviarenses en proceso de formación profesional.
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div> 
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+    <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>Visión</h2>
+          <p>
+            Al año 2020 el Museo Fotográfico de la Flora y la Fauna Silvestre es la más completa y accesible base de datos de información científica sobre los recursos naturales y turísticos del departamento del Guaviare, y es adoptada como la principal herramienta para el conocimiento de la naturaleza por centros educativos y la población en general, a nivel local, regional y nacional.
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div>
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+    <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>Objetivos</h2>
+          <p>
+            <ul class="vinetas-puntos">
+              <li>Consolidar la base de datos de información de flora y fauna del departamento.</li>
+              <li>Diseñar e implementar el museo fotográfico virtual de la fauna del Guaviare.</li>
+              <li>Diseñar y construir la galería fotográfica interactiva de la fauna en el municipio de San José del Guaviare.</li>
+              <li>Promover la utilización del museo fotográfico virtual y la galería fotográfica como herramienta para el reconocimiento de la fauna en el departamento en instituciones educativas.</li>
+            </ul>
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div>
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+     <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>Grupo de Investigación</h2>
+          
+          <p>
+            <div class="contenedor-imagenes-institucionales">
+              <img src="imagenes/biogigas.png" class="etiqueta-imagenes-institucionales">
+            </div>
+          </p>
+          
+          <p>
+            El grupo de investigación en Biodiversidad del Guaviare BIOGIGAS del CDATTG se conformó con el objetivo de promover el desarrollo local y/o regional en el departamento de Guaviare a partir del aprovechamiento de los servicios ecosistémicos de manera sustentable y se plantea el reto de aumentar la articulación de la investigación aplicada a los procesos planteados como etapas productivas en los aprendices de la CDATTG, que permitan la generación de empleo y su permanencia en el tiempo, mejorar el banco de información científica acerca de los recursos biológicos presentes en el departamento del Guaviare, que aporten a una mejor administración de los mismos y fortalecer a la CDATTG como pionera en la investigación de recursos biológicos..
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div>
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+    <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>Semillero de investigación</h2>
+          
+          <p>
+            <div class="contenedor-imagenes-institucionales">
+              <img src="imagenes/semillero1.png" class="etiqueta-imagenes-institucionales">
+            </div>
+          </p>
+          
+          <p>
+            De acuerdo a las áreas de acción en Flora y Fauna de los instructores miembros del grupo de investigación BIOGIGAS, se gesta el proyecto Museo Fotográfico conformándose así el semillero de investigación en Flora y Fauna Silvestre del Guaviare. Este proyecto vincula a grupos de formación pertenecientes al área ambiental principalmente Tecnólogo en Gestión de Recursos Naturales, a partir de los cuales se desarrolla la etapa de diagnóstico para la consolidación de la base de datos de la fauna. Con ayuda de aprendices SENA, y utilizando los recursos que ofrece el territorio se realizan las prácticas académicas que alimentan los objetivos del proyecto y al mismo tiempo promueve la participación de los aprendices del área en procesos de generación de nueva información, apropiación del conocimiento y cuidado sobre el territorio del cual hacen parte. Hasta ahora, las líneas de investigación del semillero corresponden a ecología, botánica, zoología y conservación.
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div>
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+    <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>FLORA</h2>
+          <p>
+            La flora es considerada el conjunto de plantas de una zona o período geológico determinado. El término flora corresponde a la diversidad de especies, a diferencia de vegetación que hace referencia a la distribución de las especies y a la importancia relativa, por número de individuos y tamaño de cada una de ellas. La flora, es de suma importancia para la vida del ser humano, ya que la fuente de gran cantidad de actividades productivas del hombre. Entre los productos de la flora que son más frecuentemente aprovechados se cuentan: la materia prima, tal como madera, semillas, hojas, cortezas, caucho, frutas y alimentos. En este espacio del Museo Fotográfico podrá encontrar los listados de especies de plantas del departamento del Guaviare, que reposan en nuestras bases de datos, cada una de ellas cuenta con información adicional que usted puede consultar.
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div>
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+    <div class="container">
+
+      <div class="contenedor-clarificador"> <!-- contenedor para sacar del jumbotron algunas características -->
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <h2>FAUNA</h2>
+          <p>
+            La fauna es el conjunto de especies animales que habitan en una región geográfica o que son propias de un período geológico. Ésta depende estrechamente de factores bióticos y abióticos para prosperar. Los animales suelen ser sensibles a las perturbaciones o a las alteraciones de su hábitat; por ello, un cambio en la fauna de un ecosistema indica una alteración en uno o varios de los factores de éste, por ello es importante conocer tanto la diversidad faunística de una región, así como el comportamiento de sus comunidades y poblaciones. En este espacio del Museo Fotográfico podrá encontrar los listados de especies de fauna del departamento del Guaviare, que reposan en nuestras bases de datos, cada una de ellas cuenta con información adicional que usted puede consultar.
+          </p>
+
+          <!-- <p>
+            <a class="btn btn-lg btn-primary" href="http://getbootstrap.com/components/#navbar" role="button">View navbar docs »</a>
+          </p> -->
+
+        </div>
+      </div> <!-- contenedor-clarificador -->
+
+    </div> <!-- /container -->
+
+    <!-- Esto se le quitó el 30/08/2016 porque estaba interfiriendo o tapando los enlaces, no funcionaban. -->
+    <!-- <div id="contenedor-movimiento-mapa">
+      <div id="contenedor-mapa">
+        <img src="imagenes/colombia.svg" id="mapa-colombia" class="mapa-vectorial">
+      </div>
+    </div>-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  
+    <!-- El javascript para mover las alas de la mariposa y el sitios en cuestion -->
+    <script src="js/moviendo-alas-mariposa.js"></script>
+    <script src="js/funcionalidades-generales.js"></script>  
+    <!-- El javascript para mover las alas de la mariposa  y el sitios en cuestion -->
+
+  </body>
+  
+</html>
