@@ -11,7 +11,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <!-- <link rel="icon" href="http://getbootstrap.com/favicon.ico"> -->
 
     <title>Static Top Navbar Example for Bootstrap</title>
 
@@ -39,7 +39,7 @@
 
     <!-- se agrega el angular js -->
     <script src="js/angular.min.js"></script>
-    <script src="js/angular-sanitize.js"></script>
+    <!-- <script src="js/angular-sanitize.js"></script> -->
 
     <!-- Estilos propios de la creación mariposa alas 3D y el sitio -->
     <link rel="stylesheet" href="css/estilo-mariposa.css">
@@ -155,8 +155,8 @@
 
             <div ng-controller="acumuladorAppCtrl"> <!-- angularjs -->
 
-              <!-- Aquí se renderiza el html del sanitize -->
-              <span ng-bind-html="Message"></span>
+              <!-- Aquí se renderiza el html del sanitize, cuando se quitó esto se eshizo el error nativo que aparecía. -->
+              <!-- <span ng-bind-html="Message"></span> -->
 
               <div id="contenedor-texto-busquedas">
 
@@ -179,27 +179,15 @@
                     {{ datos.Nom_localidad }}
                     {{ datos.Nom_municipio }}
                     
-                    <div ng-if="datos.Decision != -1">
-                      <!-- Renderizando html -->
-                      <span ng-bind-html="datos.Decision"></span>
-                      
-                      
-                      
-                    </div>
-                    
-                    <!-- <div ng-if="datos.Decision != -1">
-                      Se ha activado {{ datos.Decision }}
-                    </div> --> 
-                    
-                    <!-- Esta forma del if funciona -->
-                    <!-- <div ng-if="datos.Decision != 0">
-                      Se ha activado
-                    </div> -->
-                    
-                    <!-- Esta forma del if funciona -->
-                    <!-- <div>{{datos.Decision != 0 ? 'varIsTrue' : 'varIsFalse'}}</div> -->
-                    
-                </div>
+                </div> <!-- fin contenedor negro información. -->
+                
+                <!-- <div id="contenedor-imagenes" style="border: dashed 2px;" ng-model="graficos"> -->
+                
+                  <div ng-repeat="n in arreglo">
+                    <img ng-src="{{n.direccion}}" width="100px">
+                  </div>
+                        
+                <!-- </div> -->
 
                 <!-- <div>
                    <ul>
@@ -207,13 +195,13 @@
                   </ul> 
                 </div> -->
               
-              </div>
+              </div> <!-- contenedor-texto-busquedas -->
 
-            </div>
+            </div> <!-- controlador de angularjs -->
 
           </p>
 
-        </div>
+        </div> <!-- jumbotron, esto es de bootstrap -->
 
       </div> <!-- contenedor-clarificador --> 
 
