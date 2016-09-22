@@ -73,9 +73,9 @@
                     //para el cargue de las imágenes. Se ha resuelto por enviar una cadena que será fragmentada e impresa
                     //directamente en el html como imagen, pero usando angular para replicar las rutas mediante ng-repeat.
                     //$respuesta .= "<img src='".$fila[ 'url_multimedia' ]."'>";
-                    $respuesta .= "[menorq]img src=[comilla1]".$fila[ 'url_multimedia' ]."[comilla1][mayorq] [fin_item]";
+                    //$respuesta .= "[menorq]img src=[comilla1]".$fila[ 'url_multimedia' ]."[comilla1][mayorq] [fin_item]";
                     //$respuesta .= "<strong>".$fila[ 'url_multimedia' ]."</strong>";
-                    //$respuesta .= $fila[ 'url_multimedia' ]."[fin_item]";
+                    $respuesta .= $fila[ 'url_multimedia' ]."[fin_item]";
                 }
 
             }else{
