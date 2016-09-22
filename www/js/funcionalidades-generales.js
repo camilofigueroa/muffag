@@ -31,11 +31,13 @@ window.onload = function() //---------------------------------cargue de los docu
     TweenMax.to( ala1, 1, { transform: "rotateY( 0deg )" } );
     TweenMax.to( ala2, 1, { transform: "rotateY( 0deg )" } );
 
-    setInterval( function(){ obj_mecanismos.en_temporizador(); }, 500 );
+    //Por el momento desactivamos el temporizador. 21/09/2016
+    //setInterval( function(){ obj_mecanismos.en_temporizador(); }, 500 );
 } //---------------------------------------------------------fin cargue de documentos o función ini() -----------------------------------------------
 
 /******************************************* A N G U L A R ******************************************************************/
-var app = angular.module( 'acumuladorApp', ['ngSanitize'] );
+//var app = angular.module( 'acumuladorApp', ['ngSanitize'] ); //En comentario el 21/09/2016
+var app = angular.module( 'acumuladorApp' );
 
 app.controller( "acumuladorAppCtrl", 
             
@@ -69,47 +71,27 @@ app.controller( "acumuladorAppCtrl",
                                 var cad = response.records[ 0 ].Decision;
                                 var arreglo_imagenes = [];
                                 var arreglo_imagenes2 = [];
-                                //$scope.arreglo = "";
-                                
-                                //if( cad != -1 ) //Evaluo lo que hay en un recorset.
-                                //{                                
-                                    //Esto se hace porque el sanitize no está funcionando y no renderiza las imágenes. Entonces se traen las direcciones
-                                    //de las imágenes con caracteres sustitutos de algunas etiquetas html y aqui se reconstruyen con lo que deben tener.
-                                    /*while( cad.indexOf( "[menorq]" ) != -1 || cad.indexOf( "[mayorq]" ) != -1 || cad.indexOf( "[comilla1]" ) != -1 )
-                                    {
-                                        cad = cad.replace( "[menorq]", "<" ); //Ejemplo de string replace
-                                        cad = cad.replace( "[mayorq]", ">" );
-                                        cad = cad.replace( "[comilla1]", "'" );
-                                        console.log( cad );    
-                                    }                            */   
+                                var contenedor_imagenes = document.getElementById( "contenedor-imagenes" );
+
+                                //Esta sección se creó para revisar lo que hay en el campo Decision. 
+                                if( cad != -1 ) //Evaluo lo que hay en un recordset.
+                                {                                                 
+                                    arreglo_imagenes = cad.split( "[fin_item]" );
                   
-                                    //arreglo_imagenes = cad.split( "[fin_item]" );
-                  
-                                    /*for( var i = 0; i <= 2; i ++ )
+                                    for( var i = 0; i <= 2; i ++ )
                                     {
-                                        cad = "fdsfgsd"; //arreglo_imagenes[ i ] + "";
-                                        cad = cad.substring( 0, 3 );
-                                        arreglo_imagenes2.push( cad );  
-                                    } */                
-                                    
-                                    
-                                    
-                                    
-                                    //div_imagenes.innerHTML = "fdsfsd";
-                                    
-                                    //arreglo_imagenes = [ "imagenesusuarg fdg fdsg fdsgf dgsfd gfd", "sfsfdsfsd fdgfsgfds gsfdg sfdg" ];
-                                    //arreglo_imagenes = [ 1,2,3,4, 5, 6  ]; //Esto funciona al enviarlo al html.
-                                    //arreglo_imagenes = [ "imagenes/uno(4t4).jpg", "2", ""  ]; //Esto también funciona. 
-                                    //console.log( arreglo_imagenes );
-                                    //$scope.arreglo = arreglo_imagenes;
-                                    //console.log( $scope.arreglo ); 
+                                        cad = arreglo_imagenes[ i ] + "";
+                                        console.log( cad );
+                                        arreglo_imagenes2.push( { direccion: cad } );  
+                                    }                  
                   
                                     //response.records[ 0 ].Decision =  "<div>" + cad + "</div>"; //Puedo cambiar lo que hay en un recordset.
-                                //}
+                                }
                                 
-                                //$scope.arreglo = "Probando"; //Se crea una variable vigente en el scope.
+                                $scope.arreglo = arreglo_imagenes2; //Cuando se recarga el vector desde acá, si es vacío se borran las imágenes.
                                 $scope.informacion = response.records;
                                 $scope.Message = $scope.datos.texto2;
+
                                 //console.log( "Imprimiendo registros." );
                                 //console.log( response.records[ 0 ].Decision ); //Extrae un elemento del vector de registros.
                             }
@@ -264,7 +246,7 @@ function MecanismosGenerales() //Este modo simple de declarar no permite ejecuta
     {
         var mapa = document.getElementById( "contenedor-movimiento-mapa" );
         //console.log( "Ajustando contendor de movimiento: " + this.altura_total_documento );
-        mapa.style.height = this.altura_total_documento + "px";
+        //mapa.style.height = this.altura_total_documento + "px"; //Comentario agregado el 31/09/2016
     }
 
     /**
