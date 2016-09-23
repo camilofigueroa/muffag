@@ -45,16 +45,23 @@
         * @param        numero          dato que servirá para mostrar todo sobre un organismo.
         * @return       texto           cadena de carateres que representa código html para colocar fotos, videos, etc.
         */
-        function retornar_multimedia( $id_organismo )
+        function retornar_multimedia( $id_organismo, $campo = null )
         {
             $respuesta = "";
 
-            $sql  = " SELECT * ";
+            if( $campo == null ) $campo = " CONCAT( url_multimedia, '#', autor ) AS url_multimedia ";
+            
+            $sql  = " SELECT $campo ";
             $sql .= " FROM tb_multimedia t2, tb_formato t1 ";
             $sql .= " WHERE t1.id_formato = t2.id_formato ";
             $sql .= " AND id_organismo = $id_organismo ";
 
-            //$this->escribir_archivo( $sql, "mult" );
+            $this->escribir_archivo( $sql , "-sql" );
+
+            //Se quitan los distinct o comandos de bases de datos porque se requiere solo el campo.
+            if( strpos( strtolower( $campo ), "distinct") >= 0 ) $campo = TRIM( str_replace( "distinct", "", strtolower( $campo ) ) );
+            if( strpos( strtolower( $campo ), "concat(") >= 0 ) $campo = "url_multimedia";
+            //$this->escribir_archivo( $campo , "-distinct" );
 
             $conexion = $this->conectar();
             $resultado = $conexion->query( $sql );
@@ -75,13 +82,13 @@
                     //$respuesta .= "<img src='".$fila[ 'url_multimedia' ]."'>";
                     //$respuesta .= "[menorq]img src=[comilla1]".$fila[ 'url_multimedia' ]."[comilla1][mayorq] [fin_item]";
                     //$respuesta .= "<strong>".$fila[ 'url_multimedia' ]."</strong>";
-                    $respuesta .= $fila[ 'url_multimedia' ]."[fin_item]";
+                    //$respuesta .= $fila[ 'url_multimedia' ]."[fin_item]";
+                    $respuesta .= $fila[ $campo ]."[fin_item]";
                 }
 
             }else{
                     $respuesta = "";
                 }
-
 
             return $respuesta;
         }
@@ -117,6 +124,7 @@
                     $respuesta .= '"Nom_localidad":"'.utf8_encode( $fila[ "nom_localidad" ] ).'",';
                     $respuesta .= '"Nom_municipio":"'.utf8_encode( $fila[ "nom_municipio" ] ).'",';
                     $respuesta .= '"Decision":"'.utf8_encode( $fila[ "decision" ] ).'",';
+                    $respuesta .= '"Fotografos_o_autores":"'.utf8_encode( $fila[ "fotografos_o_autores" ] ).'",';
                     //$respuesta .= '"Localidad":"'.utf8_encode( $fila[ "localidad" ] ).'",';
                     $respuesta .= '"Superconjunto":"'.utf8_encode( $superconjunto ).'"}';
                 }
@@ -138,17 +146,21 @@
         {
             $respuesta = "";
             $comando_busqueda = "-1";
+            $url_fotos = "-1";
+            $fotografos_o_autores = "";
             //$des = $des == null ? "": $des; //El parámetro des es importante, puede ser un ID para un organismo u otro comando de búsqueda.
     
             if( strpos( strtolower( $cadena ), "id:" ) !== false ) //Si la búsqueda es por id, entonces saque el identificador.
             {
                 $comando_busqueda = str_replace( "id:", "", strtolower( $cadena ) ); //Se extrae el dato de interés.
-                $comando_busqueda = $this->retornar_multimedia( TRIM( $comando_busqueda ) );
-                if( $comando_busqueda == "" ) $comando_busqueda = "-1"; //Cuando no se retornarn imágenes o videos, no se colocarán en el sitio.
+                $url_fotos = $this->retornar_multimedia( TRIM( $comando_busqueda ) );
+                //$fotografos_o_autores = $this->retornar_multimedia( TRIM( $comando_busqueda ), " DISTINCT autor" ); //Buscamos solo los autores.
+                if( $url_fotos == "" ) $url_fotos = "-2"; //Cuando no se retornan imágenes o videos, no se colocarán en el sitio.
             }
 
             $respuesta .= " SELECT t1.*, t2.nom_familia, t3.nom_clase, t4.nom_especie, t5.nom_genero, t6.nom_orden, t7.nom_localidad, t8.nom_municipio ";
-            $respuesta .= ", '".$comando_busqueda."' AS decision "; //Aquí interviene una búsqueda específica, corta o detalle de organismo.
+            $respuesta .= ", '".$url_fotos."' AS decision, "; //Aquí interviene una búsqueda específica, corta o detalle de organismo.
+            $respuesta .= " '".$fotografos_o_autores."' AS fotografos_o_autores "; //Esto no está funcional al 22/09/2016.
             $respuesta .= " FROM tb_organismos t1, tb_familia t2, tb_clase t3, tb_especie t4, tb_genero t5, tb_orden t6, tb_localidad t7, tb_municipio t8 ";
             $respuesta .= " WHERE t1.id_familia         = t2.id_familia ";
             $respuesta .= " AND t1.id_clase             = t3.id_clase ";
