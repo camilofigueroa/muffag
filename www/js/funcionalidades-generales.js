@@ -10,6 +10,7 @@ var acumuladorApp = angular.module( 'acumuladorApp', [] );
 
 window.onload = function() //---------------------------------cargue de los documentos o ejecución, sirve de función ini() --------------------------
 {
+        
     obj_movimiento  = new movimiento(); //Nacimiento de la instancia de la clase.
 
     obj_mecanismos.ajustar_contenedor_movimiento_mapa();
@@ -81,11 +82,15 @@ app.controller( "acumuladorAppCtrl",
                                     for( var i = 0; i <= 2; i ++ )
                                     {
                                         cad = arreglo_imagenes[ i ] + "";
+                                        //Gallery.addItems( '<li><a href="#"><img src="imagenes/usuario/Edwar Beltrán(1).JPG" data-large="imagenes/usuario/Edwar Beltrán(1).JPG" alt="image01" data-description="Este es agregado desde angular." /></a></li>' );
                                         console.log( cad );
                                         arreglo_imagenes2.push( { direccion: cad } );  
                                     }                  
                   
                                     //response.records[ 0 ].Decision =  "<div>" + cad + "</div>"; //Puedo cambiar lo que hay en un recordset.
+
+                                    //Esto se ha llamado del otro js, el de la galería.
+                                    //establecer_mensaje(); //Con esto se genera un error en el Angular.
                                 }
                                 
                                 $scope.arreglo = arreglo_imagenes2; //Cuando se recarga el vector desde acá, si es vacío se borran las imágenes.
@@ -94,6 +99,8 @@ app.controller( "acumuladorAppCtrl",
 
                                 //console.log( "Imprimiendo registros." );
                                 //console.log( response.records[ 0 ].Decision ); //Extrae un elemento del vector de registros.
+
+                                //Gallery.init();
                             }
                         );
 
@@ -359,7 +366,11 @@ function MecanismosGenerales() //Este modo simple de declarar no permite ejecuta
     
     //No se deben declarar funciones en esta última parte, de las cuales se espere un retorno de valores.
 
+    //console.log( $a1 );
+      
 }
+
+
 
 /**
  * Este método fue sacado del siguiente sitio: http://james.padolsey.com/javascript/get-document-height-cross-browser/
@@ -377,5 +388,25 @@ function MecanismosGenerales() //Este modo simple de declarar no permite ejecuta
 }*/
 
 
+/*$(  function()
+    {
+        var a1 = "Esta es una variable desde el primer ready";
+        //console.log( "Primer ready" ); 
+        colocar_mensaje = function(){ console.log( "Colocando mensaje." ); }
+        //console.log( a1 );
 
+        //colocar_mensaje();
+    } 
+);
 
+$(  function()
+    { 
+        var a2 = "Esta es una variable desde el segundo ready";
+        //console.log( "Segundo ready" );
+        colocar_mensaje = function(){ console.log( "Colocando mensaje." ); }
+
+        //colocar_mensaje();
+    } 
+);*/
+
+//colocar_mensaje();
