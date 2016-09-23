@@ -77,14 +77,15 @@ app.controller( "acumuladorAppCtrl",
                                 //Esta sección se creó para revisar lo que hay en el campo Decision. 
                                 if( cad != -1 ) //Evaluo lo que hay en un recordset.
                                 {                                                 
-                                    arreglo_imagenes = cad.split( "[fin_item]" );
+                                    arreglo_imagenes = cad.split( "[fin_item]" ); //Debido a este fin de linea, siempre se retornará un espacio de más.
                   
-                                    for( var i = 0; i <= 2; i ++ )
+                                    for( var i = 0; i < arreglo_imagenes.length - 1; i ++ )
                                     {
                                         cad = arreglo_imagenes[ i ] + "";
-                                        //Gallery.addItems( '<li><a href="#"><img src="imagenes/usuario/Edwar Beltrán(1).JPG" data-large="imagenes/usuario/Edwar Beltrán(1).JPG" alt="image01" data-description="Este es agregado desde angular." /></a></li>' );
-                                        console.log( cad );
-                                        arreglo_imagenes2.push( { direccion: cad } );  
+                                        //console.log( "Indexof" + cad.indexOf( "#" ) );
+                                        //console.log( cad.substr( cad.indexOf( "#" ) + 1 ) );
+                                        //console.log( cad );
+                                        arreglo_imagenes2.push( { direccion: cad, autor: cad.substr( cad.indexOf( "#" ) + 1 ) } );  
                                     }                  
                   
                                     //response.records[ 0 ].Decision =  "<div>" + cad + "</div>"; //Puedo cambiar lo que hay en un recordset.
