@@ -10,23 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     
-    <!-- Las siguientes etiquetas vienen con la galería -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
-    <meta name="description" content="Responsive Image Gallery with jQuery" />
-    <meta name="keywords" content="jquery, carousel, image gallery, slider, responsive, flexible, fluid, resize, css3" />
-		<meta name="author" content="Codrops" />
-    <!-- Las anteriores etiquetas vienen con la galería -->
-    
     <!-- <link rel="icon" href="http://getbootstrap.com/favicon.ico"> -->
 
     <title>Static Top Navbar Example for Bootstrap</title>
-
-    <!-- Los siguientes Css son dela galería -->
-    <link rel="stylesheet" type="text/css" href="css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<link rel="stylesheet" type="text/css" href="css/elastislide.css" />
-    <!-- Los anteriores Css son dela galería -->
 
     <!-- Fuente de google -->
     <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
@@ -63,33 +49,6 @@
 
     <!-- Los tweeners de Gsap --> 
     <script src="js/minified/TweenMax.min.js"></script>
-    
-    <!-- El siguiente código es de la galería. -->
-    <noscript>
-			<style>
-				.es-carousel ul{
-					display:block;
-				}
-			</style>
-		</noscript>
-		<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">	
-			<div class="rg-image-wrapper">
-				{{if itemsCount > 1}}
-					<div class="rg-image-nav">
-						<a href="#" class="rg-image-nav-prev">Previous Image</a>
-						<a href="#" class="rg-image-nav-next">Next Image</a>
-					</div>
-				{{/if}}
-				<div class="rg-image"></div>
-				<div class="rg-loading"></div>
-				<div class="rg-caption-wrapper">
-					<div class="rg-caption" style="display:none;">
-						<p></p>
-					</div>
-				</div>
-			</div>
-		</script>
-    <!-- El anterior código es de la galería. -->
     
   </head>
 
@@ -196,7 +155,7 @@
 
             <div ng-controller="acumuladorAppCtrl"> <!-- angularjs -->
 
-              <!-- Aquí se renderiza el html del sanitize, cuando se quitó esto se eshizo el error nativo que aparecía. -->
+              <!-- Aquí se renderiza el html del sanitize, cuando se quitó esto se deshizo el error nativo que aparecía. -->
               <!-- <span ng-bind-html="Message"></span> -->
 
               <div id="contenedor-texto-busquedas">
@@ -210,52 +169,58 @@
                 
                 Resultados de la búsqueda<br>
                 <div class="contenedor-negro-informacion" ng-repeat="datos in informacion">
-                    <button class="btn btn-success" ng-click="ajustar_comando_busqueda_completa( datos.Id )">Ver</button>
-                    {{ datos.Nombre_comun }} <strong>{{ datos.Nombre_cientifico }}</strong>
-                    {{ datos.Nom_familia }}
-                    {{ datos.Nom_clase }}
-                    {{ datos.Nom_especie }}
-                    {{ datos.Nom_genero }}
-                    {{ datos.Nom_orden }}
-                    {{ datos.Nom_localidad }}
-                    {{ datos.Nom_municipio }}
-                    
+										
+										<div class="contenedor-informacion-especimenes">
+											
+											<div ng-if="datos.Decision != -1">Nombre común:</div>
+											{{ datos.Nombre_comun }} <div ng-if="datos.Decision != -1"><br></div>
+											
+											<div ng-if="datos.Decision != -1">Nombre científico:</div>
+											<strong>{{ datos.Nombre_cientifico }}</strong><div ng-if="datos.Decision != -1"><br></div>
+											
+											<div ng-if="datos.Decision != -1">Familia:</div>
+											{{ datos.Nom_familia }}<div ng-if="datos.Decision != -1"><br></div>
+											
+											<div ng-if="datos.Decision != -1">Clase:</div>
+											{{ datos.Nom_clase }}<div ng-if="datos.Decision != -1"><br></div>
+											
+											<div ng-if="datos.Decision != -1">Especie:</div>
+											{{ datos.Nom_especie }}<div ng-if="datos.Decision != -1"><br></div>
+											
+											<div ng-if="datos.Decision != -1">Género:</div>
+											{{ datos.Nom_genero }}<div ng-if="datos.Decision != -1"><br></div>
+											
+											<div ng-if="datos.Decision != -1">Orden:</div>
+											{{ datos.Nom_orden }}<div ng-if="datos.Decision != -1"><br></div>
+											
+											<div ng-if="datos.Decision != -1">Municipio:</div>
+											{{ datos.Nom_municipio }}<div ng-if="datos.Decision != -1"><br></div>
+											
+											<div ng-if="datos.Decision != -1">Localidad:</div>
+											{{ datos.Nom_localidad }}<div ng-if="datos.Decision != -1"><br></div>
+											
+                    </div> <!-- contenedor-informacion-especimenes -->
+										
+										<div ng-if="datos.Decision == -1" class="contenedor-boton-ver-mas">
+											<button class="btn btn-success" ng-click="ajustar_comando_busqueda_completa( datos.Id )">Ver</button>
+										</div> <!-- contenedor-boton-ver-mas -->
+										
+										<div class="div-limpiador"></div>
+										
                 </div> <!-- fin contenedor negro información. -->
                 
                 <!-- <div id="contenedor-imagenes" style="border: dashed 2px;" ng-model="graficos"> -->
                 
-                <!-- 
-                  <div ng-repeat="n in arreglo">
-                    <img ng-src="{{n.direccion}}" width="100px">
+                <!-- Un primer intento de galería --> 
+										
+                  <div ng-repeat="n in arreglo" class="contenedor-imagen-galeria">
+										
+                    <img ng-src="{{n.direccion}}" class="imagen-galeria">
+										<div class="contenedor-autor-foto">Autor: <strong>{{n.autor}}</strong></div>
+										
                   </div>
-                  -->
+                  
                        
-                  <!-- Galería Galería Galería ojo cuidado, esta es la parte de la galería -->
-                  <div class="content">
-                    <div id="rg-gallery" class="rg-gallery">
-                      <div class="rg-thumbs">
-                        <!-- Elastislide Carousel Thumbnail Viewer -->
-                        <div class="es-carousel-wrapper">
-                          <div class="es-nav">
-                            <span class="es-nav-prev">Previous</span>
-                            <span class="es-nav-next">Next</span>
-                          </div>
-                          <div class="es-carousel">
-                            <ul>
-                              <li>
-                                <a href="#">
-                                  <img src="imagenes/usuario/Edwar Beltrán(1).JPG" data-large="imagenes/usuario/Edwar Beltrán(1).JPG" alt="Chingolo pájaro" data-description="Imagen tomada por uno de los fotógrafos de Sifas." />
-                                </a>
-                              </li>                              
-                            </ul>
-                          </div>
-                        </div>
-                        <!-- End Elastislide Carousel Thumbnail Viewer -->
-                      </div><!-- rg-thumbs -->
-                    </div><!-- rg-gallery -->
-                  </div><!-- content -->
-                  <!-- Galería Galería Galería ojo cuidado, lo anterior es la parte de la galería -->     
-                        
                 <!-- </div> -->
 
                 <!-- <div>
@@ -268,8 +233,8 @@
 
             </div> <!-- controlador de angularjs -->
 
-			<!-- Aquí va nuevamente la galería. -->
-			<object type="text/html" data="../assets/ResponsiveImageGallery/index.html" width="100%" style="min-height: 700px;"> </object>        
+						<!-- Aquí va nuevamente la galería. -->
+						<!-- <object type="text/html" data="../assets/ResponsiveImageGallery/index.html" width="100%" style="min-height: 700px;"> </object>        -->
 
 
           </p>
@@ -490,13 +455,6 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-
-    <!-- Los siguientes js son de la galería, también con el jquery.min.js -->
-    <script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
-		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="js/jquery.elastislide.js"></script>
-		<script type="text/javascript" src="js/gallery.js"></script>
-    <!-- Los anteriores js son de la galería, también con el jquery.min.js -->
 
     <!-- El javascript para mover las alas de la mariposa y el sitios en cuestion -->
     <script src="js/moviendo-alas-mariposa.js"></script>
